@@ -1,0 +1,204 @@
+/* --- Base Styles & Variables --- */
+:root {
+    --bg-color: #050505;
+    --text-main: #e0e0e0;
+    --accent-red: #ff003c;
+    --accent-blue: #00f0ff;
+    --font-mono: 'Courier New', Courier, monospace;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    font-family: var(--font-mono);
+    overflow-x: hidden;
+}
+
+/* Background static lines */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.15),
+        rgba(0, 0, 0, 0.15) 1px,
+        transparent 1px,
+        transparent 2px
+    );
+    pointer-events: none;
+    z-index: 999;
+}
+
+/* --- Navigation --- */
+header {
+    padding: 20px 40px;
+    border-bottom: 1px solid rgba(255, 0, 60, 0.3);
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    color: var(--accent-red);
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links a {
+    color: var(--text-main);
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: var(--accent-blue);
+    text-shadow: 0 0 8px var(--accent-blue);
+}
+
+/* --- Hero Section --- */
+.hero {
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.subtitle {
+    margin-top: 20px;
+    font-size: 1.2rem;
+    color: #888;
+    letter-spacing: 1px;
+}
+
+/* --- Glitch Effect --- */
+.glitch {
+    font-size: 5rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    position: relative;
+    color: white;
+    text-shadow: 0.05em 0 0 var(--accent-red), -0.05em -0.01em 0 var(--accent-blue);
+}
+
+.glitch::before, .glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.glitch::before {
+    left: 2px;
+    text-shadow: -2px 0 var(--accent-red);
+    clip: rect(24px, 550px, 90px, 0);
+    animation: glitch-anim-2 3s infinite linear alternate-reverse;
+}
+
+.glitch::after {
+    left: -2px;
+    text-shadow: -2px 0 var(--accent-blue);
+    clip: rect(85px, 550px, 140px, 0);
+    animation: glitch-anim 2.5s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-anim {
+    0% { clip: rect(10px, 9999px, 80px, 0); }
+    20% { clip: rect(40px, 9999px, 10px, 0); }
+    40% { clip: rect(90px, 9999px, 50px, 0); }
+    60% { clip: rect(20px, 9999px, 100px, 0); }
+    80% { clip: rect(70px, 9999px, 30px, 0); }
+    100% { clip: rect(30px, 9999px, 90px, 0); }
+}
+
+@keyframes glitch-anim-2 {
+    0% { clip: rect(65px, 9999px, 100px, 0); }
+    20% { clip: rect(10px, 9999px, 50px, 0); }
+    40% { clip: rect(80px, 9999px, 20px, 0); }
+    60% { clip: rect(30px, 9999px, 80px, 0); }
+    80% { clip: rect(90px, 9999px, 10px, 0); }
+    100% { clip: rect(40px, 9999px, 60px, 0); }
+}
+
+/* --- Chaos Button --- */
+.chaos-btn {
+    margin-top: 40px;
+    padding: 15px 30px;
+    background: transparent;
+    color: var(--accent-red);
+    border: 2px solid var(--accent-red);
+    font-family: var(--font-mono);
+    font-size: 1.2rem;
+    cursor: pointer;
+    text-transform: uppercase;
+    position: relative;
+    transition: all 0.2s;
+}
+
+.chaos-btn:hover {
+    background: var(--accent-red);
+    color: var(--bg-color);
+    box-shadow: 0 0 15px var(--accent-red);
+    transform: scale(1.05);
+}
+
+/* --- Asymmetrical Grid --- */
+.grid-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 50px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.card {
+    border: 1px solid #333;
+    padding: 30px;
+    background: rgba(20, 20, 20, 0.8);
+    transition: transform 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    border-color: var(--accent-blue);
+}
+
+.card h3 {
+    color: var(--accent-blue);
+    margin-bottom: 15px;
+    border-bottom: 1px dashed #444;
+    padding-bottom: 10px;
+}
+
+/* Making the grid asymmetrical/chaotic */
+.card-1 { transform: rotate(-2deg); }
+.card-2 { transform: translateY(20px); }
+.card-3 { transform: rotate(1deg); }
+
+.card-1:hover, .card-2:hover, .card-3:hover {
+    transform: rotate(0deg) scale(1.05);
+    z-index: 10;
+}
